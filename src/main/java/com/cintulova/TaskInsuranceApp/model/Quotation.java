@@ -4,9 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
@@ -30,5 +31,18 @@ public class Quotation {
 
     @ManyToOne
     private Customer customer;
+
+    @OneToMany
+    @JoinColumn(name = "quotation_id")
+    private Set<Subscription> subscriptions = new HashSet<>();
+
+    // constructor
+    public Quotation(Long id, LocalDate beginningOfInsurance, Long insuredAmount, LocalDate dateOfSigningMortgage, Customer customer) {
+        this.id = id;
+        this.beginningOfInsurance = beginningOfInsurance;
+        this.insuredAmount = insuredAmount;
+        this.dateOfSigningMortgage = dateOfSigningMortgage;
+        this.customer = customer;
+    }
 
 }
