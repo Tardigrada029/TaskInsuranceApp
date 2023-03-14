@@ -3,5 +3,5 @@ package com.cintulova.TaskInsuranceApp.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class QuotationService {
 }
