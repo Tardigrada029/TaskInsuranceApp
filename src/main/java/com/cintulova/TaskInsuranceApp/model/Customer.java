@@ -22,23 +22,23 @@ public class Customer {
     private Long id;
 
     @Size(min = 2, max = 150)
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, length = 150)
     private String firstName;
 
     @Size(min = 2, max = 150)
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false, length = 150)
     private String lastName;
 
     @Size(min = 2, max = 150)
-    @Column(name = "middle_name")
+    @Column(name = "middle_name", length = 150)
     private String MiddleName;
 
     @Size(min = 10, max = 150)
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 150)
     private String email;
 
     @Size(min = 7, max = 14)
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false, length = 14)
     private String phoneNumber;
 
     @Column(name = "birth_date", nullable = false)
