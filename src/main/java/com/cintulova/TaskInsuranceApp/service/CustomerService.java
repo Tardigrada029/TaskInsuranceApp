@@ -26,10 +26,19 @@ public class CustomerService  {
     }
 
     public Customer saveCustomer(Customer customer) {
+        if (customerRepository.findByEmail(customer.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Customer with email " + customer.getEmail() + " already exists.");
+        }
+        if (!nameValidator.isValidName(customer.getFirstName()) || !nameValidator.isValidMiddleName(customer.getMiddleName()) || !nameValidator.isValidName(customer.getLastName()) || !emailValidator.isValidEmail(customer.getEmail()) || !phoneNumberValidator.isValidPhoneNumber(customer.getPhoneNumber()) || !dateInTheFutureValidator.isValidDateInTheFuture(customer.getBirthDate())) {
+            throw new IllegalArgumentException("Fill all the fields in correct format.");
+        }
         return customerRepository.save(customer);
     }
 
     public Optional<Customer> getUserById(Long id) {
+        if (customerRepository.findById(id).isEmpty()) {
+            throw new NoSuchElementException("Could not find customer with id " + id + ".");
+        }
         return customerRepository.findById(id);
     }
 

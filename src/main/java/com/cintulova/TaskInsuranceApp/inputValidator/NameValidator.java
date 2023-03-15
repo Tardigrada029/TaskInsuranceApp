@@ -13,4 +13,8 @@ public class NameValidator {
         return INTERNATIONAL_NAME_REGEX.matcher(name).matches() && name.length() >= 2 && name.length() <= 150;
     }
 
+    public Boolean isValidMiddleName (String name) {
+        return INTERNATIONAL_NAME_REGEX.matcher(name).matches() && name.length() <= 150;
+    }
+
 }
