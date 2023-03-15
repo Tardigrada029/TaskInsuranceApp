@@ -3,6 +3,7 @@ package com.cintulova.TaskInsuranceApp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,18 +21,23 @@ public class Customer {
     @Column(name = "customer_id")
     private Long id;
 
+    @Size(min = 2, max = 150)
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Size(min = 2, max = 150)
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Size(min = 2, max = 150)
     @Column(name = "middle_name")
     private String MiddleName;
 
+    @Size(min = 10, max = 150)
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Size(min = 7, max = 14)
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 

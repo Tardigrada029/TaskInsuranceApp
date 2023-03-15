@@ -3,6 +3,7 @@ package com.cintulova.TaskInsuranceApp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class Quotation {
     @Column(name = "beginning_of_insurance", nullable = false)
     private LocalDate beginningOfInsurance;
 
+    @Size(min = 1)
     @Column(name = "insured_amount", nullable = false)
     private Long insuredAmount;
 
