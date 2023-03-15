@@ -21,14 +21,14 @@ public class DateInTheFutureValidatorTest {
     @Test
     public void returnTrueWhenDateIsInTheFuture() {
 
-        assertTrue(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().plusDays(30)));
+        assertTrue(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().plusDays(1)));
 
     }
 
     @Test
     public void returnFalseWhenDateIsNotInTheFuture() {
 
-        assertFalse(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().minusDays(30)));
+        assertFalse(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().minusDays(1)));
 
     }
 }
