@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 
 public class DateInTheFutureValidatorTest {
 
-    DateInTheFutureValidator dateInTheFutureValidator;
+    private DateInTheFutureValidator dateInTheFutureValidator;
 
     @BeforeMethod
     public void setUp() {
@@ -21,6 +21,7 @@ public class DateInTheFutureValidatorTest {
     @Test
     public void returnTrueWhenDateIsInTheFuture() {
 
+        // when & then
         assertTrue(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().plusDays(1)));
 
     }
@@ -28,6 +29,7 @@ public class DateInTheFutureValidatorTest {
     @Test
     public void returnFalseWhenDateIsNotInTheFuture() {
 
+        // when & then
         assertFalse(dateInTheFutureValidator.isValidDateInTheFuture(LocalDate.now().minusDays(1)));
 
     }

@@ -31,7 +31,7 @@ public class Customer {
 
     @Size(min = 2, max = 150)
     @Column(name = "middle_name", length = 150)
-    private String MiddleName;
+    private String middleName;
 
     @Size(min = 10, max = 150)
     @Column(name = "email", nullable = false, length = 150)
@@ -53,7 +53,7 @@ public class Customer {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.MiddleName = middleName;
+        this.middleName = middleName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
