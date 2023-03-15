@@ -18,8 +18,8 @@ public class QuotationService {
         this.dateInTheFutureValidator = dateInTheFutureValidator;
     }
 
-    public void saveQuotation(Quotation quotation) {
-        quotationRepository.save(quotation);
+    public Quotation saveQuotation(Quotation quotation) {
+        return quotationRepository.save(quotation);
     }
 
     public Optional<Quotation> getQuotationById(Long id) {

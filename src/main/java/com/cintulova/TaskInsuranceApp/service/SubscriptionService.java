@@ -18,8 +18,8 @@ public class SubscriptionService {
         this.dateInTheFutureValidator = dateInTheFutureValidator;
     }
 
-    public void saveSubscription(Subscription subscription) {
-        subscriptionRepository.save(subscription);
+    public Subscription saveSubscription(Subscription subscription) {
+        return subscriptionRepository.save(subscription);
     }
 
     public Optional<Subscription> getSubscriptionById(Long id) {

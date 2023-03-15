@@ -5,6 +5,7 @@ import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -24,8 +25,8 @@ public class CustomerService  {
         this.phoneNumberValidator = phoneNumberValidator;
     }
 
-    public void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public Customer saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     public Optional<Customer> getUserById(Long id) {
@@ -33,6 +34,9 @@ public class CustomerService  {
     }
 
     public void deleteCustomerById(Long id) {
+        if (customerRepository.findById(id).isEmpty()) {
+            throw new NoSuchElementException("Could not find customer with id " + id + ".");
+        }
         customerRepository.deleteById(id);
     }
 
