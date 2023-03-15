@@ -39,7 +39,8 @@ public class Quotation {
     private Set<Subscription> subscriptions = new HashSet<>();
 
     // constructor
-    public Quotation(Long id, LocalDate beginningOfInsurance, Long insuredAmount, LocalDate dateOfSigningMortgage, Customer customer) {
+    public Quotation(Long id, LocalDate beginningOfInsurance, Long insuredAmount,
+                     LocalDate dateOfSigningMortgage, Customer customer) {
         this.id = id;
         this.beginningOfInsurance = beginningOfInsurance;
         this.insuredAmount = insuredAmount;

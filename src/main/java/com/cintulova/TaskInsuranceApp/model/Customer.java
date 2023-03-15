@@ -48,7 +48,8 @@ public class Customer {
     @JoinColumn(name = "customer_id")
     private Set<Quotation> quotations = new HashSet<>();
 
-    public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber, LocalDate birthDate) {
+    public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber,
+                    LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

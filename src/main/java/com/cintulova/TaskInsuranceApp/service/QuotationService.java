@@ -13,7 +13,8 @@ public class QuotationService {
     private final QuotationRepository quotationRepository;
     private final DateInTheFutureValidator dateInTheFutureValidator;
 
-    public QuotationService(QuotationRepository quotationRepository, DateInTheFutureValidator dateInTheFutureValidator) {
+    public QuotationService(QuotationRepository quotationRepository,
+                            DateInTheFutureValidator dateInTheFutureValidator) {
         this.quotationRepository = quotationRepository;
         this.dateInTheFutureValidator = dateInTheFutureValidator;
     }

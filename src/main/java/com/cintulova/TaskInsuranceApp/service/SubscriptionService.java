@@ -13,7 +13,8 @@ public class SubscriptionService {
     private final SubscriptionRepository subscriptionRepository;
     private final DateInTheFutureValidator dateInTheFutureValidator;
 
-    public SubscriptionService(SubscriptionRepository subscriptionRepository, DateInTheFutureValidator dateInTheFutureValidator) {
+    public SubscriptionService(SubscriptionRepository subscriptionRepository,
+                               DateInTheFutureValidator dateInTheFutureValidator) {
         this.subscriptionRepository = subscriptionRepository;
         this.dateInTheFutureValidator = dateInTheFutureValidator;
     }
