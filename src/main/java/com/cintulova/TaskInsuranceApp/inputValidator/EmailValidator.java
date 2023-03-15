@@ -10,7 +10,7 @@ public class EmailValidator {
     private static final Pattern EMAIL_REGEX = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,})$");
 
     public Boolean isValidEmail (String email) {
-        return EMAIL_REGEX.matcher(email).matches();
+        return EMAIL_REGEX.matcher(email).matches() && email.length() >= 10 && email.length() <= 150;
     }
 
 }
