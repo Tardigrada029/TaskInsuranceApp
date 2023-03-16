@@ -1,6 +1,5 @@
 package com.cintulova.TaskInsuranceApp.service;
 
-import com.cintulova.TaskInsuranceApp.inputValidator.DateInTheFutureValidator;
 import com.cintulova.TaskInsuranceApp.model.Subscription;
 import com.cintulova.TaskInsuranceApp.repository.SubscriptionRepository;
 import org.springframework.stereotype.Service;

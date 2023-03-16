@@ -1,11 +1,8 @@
 package com.cintulova.TaskInsuranceApp.service;
 
-import com.cintulova.TaskInsuranceApp.inputValidator.DateInTheFutureValidator;
 import com.cintulova.TaskInsuranceApp.model.Quotation;
 import com.cintulova.TaskInsuranceApp.repository.QuotationRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class QuotationService {

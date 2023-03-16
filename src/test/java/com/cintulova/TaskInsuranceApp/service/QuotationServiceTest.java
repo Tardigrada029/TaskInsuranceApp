@@ -1,6 +1,5 @@
 package com.cintulova.TaskInsuranceApp.service;
 
-import com.cintulova.TaskInsuranceApp.inputValidator.DateInTheFutureValidator;
 import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.repository.QuotationRepository;
 import org.mockito.Mock;
@@ -17,7 +16,6 @@ public class QuotationServiceTest {
     @Mock
     private QuotationRepository mockQuotationRepository;
     @Mock
-    private DateInTheFutureValidator mockDateInTheFutureValidator;
     private QuotationService quotationService;
 
     private final Long ID = 0L;

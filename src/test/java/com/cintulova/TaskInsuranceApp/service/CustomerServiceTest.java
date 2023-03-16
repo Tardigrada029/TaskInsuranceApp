@@ -1,6 +1,5 @@
 package com.cintulova.TaskInsuranceApp.service;
 
-import com.cintulova.TaskInsuranceApp.inputValidator.DateInTheFutureValidator;
 import com.cintulova.TaskInsuranceApp.inputValidator.EmailValidator;
 import com.cintulova.TaskInsuranceApp.inputValidator.NameValidator;
 import com.cintulova.TaskInsuranceApp.inputValidator.PhoneNumberValidator;
@@ -99,8 +98,18 @@ public class CustomerServiceTest {
 
     }
 
+    // TODO
     @Test
-    public void throwIllegalArgumentExceptionWhenThereIsBlankVariableWhileCReatingNewCustomer() {
+    public void throwIllegalArgumentExceptionWhileCreatingNewCustomerWithBirthDateInTheFuture() {
+        // given
+
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME));
+    }
+
+    @Test
+    public void throwIllegalArgumentExceptionWhenThereIsBlankVariableWhileCreatingNewCustomer() {
         // given
         when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(false);
         when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
