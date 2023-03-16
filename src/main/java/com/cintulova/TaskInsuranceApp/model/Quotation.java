@@ -24,7 +24,6 @@ public class Quotation {
     @Column(name = "beginning_of_insurance", nullable = false)
     private LocalDate beginningOfInsurance;
 
-    @Size(min = 1)
     @Column(name = "insured_amount", nullable = false)
     private Long insuredAmount;
 
