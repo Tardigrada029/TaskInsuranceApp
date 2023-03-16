@@ -5,6 +5,7 @@ import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -12,18 +13,15 @@ import java.util.Optional;
 public class CustomerService  {
 
     private final CustomerRepository customerRepository;
-    private final DateInTheFutureValidator dateInTheFutureValidator;
     private final EmailValidator emailValidator;
     private final NameValidator nameValidator;
     private final PhoneNumberValidator phoneNumberValidator;
 
     public CustomerService(CustomerRepository customerRepository,
-                           DateInTheFutureValidator dateInTheFutureValidator,
                            EmailValidator emailValidator,
                            NameValidator nameValidator,
                            PhoneNumberValidator phoneNumberValidator) {
         this.customerRepository = customerRepository;
-        this.dateInTheFutureValidator = dateInTheFutureValidator;
         this.emailValidator = emailValidator;
         this.nameValidator = nameValidator;
         this.phoneNumberValidator = phoneNumberValidator;
@@ -38,7 +36,7 @@ public class CustomerService  {
                 !nameValidator.isValidName(customer.getLastName()) ||
                 !emailValidator.isValidEmail(customer.getEmail()) ||
                 !phoneNumberValidator.isValidPhoneNumber(customer.getPhoneNumber()) ||
-                !dateInTheFutureValidator.isValidDateInTheFuture(customer.getBirthDate())) {
+                customer.getBirthDate().isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Fill all the fields in correct format.");
         }
         return customerRepository.save(customer);
