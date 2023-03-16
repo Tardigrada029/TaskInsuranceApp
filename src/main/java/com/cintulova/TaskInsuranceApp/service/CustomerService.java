@@ -49,6 +49,10 @@ public class CustomerService  {
         return customerRepository.findById(id);
     }
 
+    public Iterable<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
     public Optional<Customer> getCustomerByEmail(String email) {
         if (customerRepository.findByEmail(email).isEmpty()) {
             throw new NoSuchElementException("Could not find customer with email " + email + ".");
