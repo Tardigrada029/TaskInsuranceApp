@@ -124,20 +124,41 @@ public class CustomerServiceTest {
     @Test
     public void returnExistingSavedCustomerWithGivenId() {
         // given
-        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
 
         // when & then
-        assertEquals(customerService.getCustomerById(0L), Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        assertEquals(customerService.getCustomerById(ID), Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
 
     }
 
     @Test
     public void throwNoSuchElementExceptionWhenThereIsNoSavedCustomerWithGivenId() {
         // given
-        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.empty());
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.empty());
 
         // when & then
-        assertThrows(NoSuchElementException.class, () -> customerService.getCustomerById(0L));
+        assertThrows(NoSuchElementException.class, () -> customerService.getCustomerById(ID));
+
+    }
+
+    // ********** getCustomerById() **********
+    @Test
+    public void returnExistingSavedCustomerWithGivenEmail() {
+        // given
+        when(mockCustomerRepository.findByEmail(EMAIL)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+
+        // when & then
+        assertEquals(customerService.getCustomerByEmail(EMAIL), Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+
+    }
+
+    @Test
+    public void throwNoSuchElementExceptionWhenThereIsNoSavedCustomerWithGivenEmail() {
+        // given
+        when(mockCustomerRepository.findByEmail(EMAIL)).thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> customerService.getCustomerByEmail(EMAIL));
 
     }
 
@@ -145,7 +166,7 @@ public class CustomerServiceTest {
     @Test
     public void updateExistingUserWithGivenId() {
         // given
-        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
         when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
         when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
@@ -163,7 +184,7 @@ public class CustomerServiceTest {
     @Test
     public void throwNoSuchElementExceptionWhenUserWithGivenIdIsNotPresentToUpdate() {
         // given
-        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.empty());
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.empty());
         when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
         when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
