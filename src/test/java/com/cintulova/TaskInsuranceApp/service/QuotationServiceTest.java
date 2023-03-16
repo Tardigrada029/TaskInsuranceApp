@@ -10,13 +10,13 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
 public class QuotationServiceTest {
 
     @Mock
     private QuotationRepository mockQuotationRepository;
-    @Mock
     private QuotationService quotationService;
 
     private final Long ID = 0L;
@@ -26,11 +26,12 @@ public class QuotationServiceTest {
     private final String EMAIL = "kate.green@gmail.com";
     private final String PHONE_NUMBER = "+420122789098";
     private final LocalDate BIRTH_DATE = LocalDate.now().minusYears(30);
-    private final LocalDate DATE_IN_THE_PAST = LocalDate.now().plusMonths(2);
+    private final LocalDate DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS = LocalDate.now().plusMonths(2);
     private final Long INSURED_AMOUNT = 15000L;
     private final LocalDate DATE_IN_THE_FUTURE = LocalDate.now().plusDays(2);
     private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
-    //private final Quotation QUOTATION = new Quotation(ID, )
+    private final Quotation QUOTATION = new Quotation(ID, DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS, INSURED_AMOUNT, DATE_IN_THE_FUTURE, CUSTOMER_WITH_MIDDLE_NAME);
+    private final Quotation QUOTATION_WRONG_DATES = new Quotation(ID, DATE_IN_THE_FUTURE, INSURED_AMOUNT, DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS, CUSTOMER_WITH_MIDDLE_NAME);
 
 
     @BeforeMethod
@@ -43,19 +44,20 @@ public class QuotationServiceTest {
     @Test
     public void createNewQuotation() {
         // given
-
+        when(mockQuotationRepository.save(QUOTATION)).thenReturn(QUOTATION);
 
         // when & then
-
+        assertEquals(quotationService.saveQuotation(QUOTATION), QUOTATION);
 
     }
 
     @Test
     public void throwIllegalArgumentExceptionWhenSigningMortgageIsAfterBeginningInsuranceWhileCreatingNewQuotation() {
         // given
-        
+        when(mockQuotationRepository.save(QUOTATION_WRONG_DATES)).thenReturn(QUOTATION_WRONG_DATES);
 
         // when & then
+        assertThrows(IllegalArgumentException.class, () -> quotationService.saveQuotation(QUOTATION_WRONG_DATES));
 
     }
 }
