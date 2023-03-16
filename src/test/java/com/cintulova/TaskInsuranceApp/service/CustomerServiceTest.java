@@ -177,6 +177,28 @@ public class CustomerServiceTest {
         assertThrows(NoSuchElementException.class, () -> customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID));
     }
 
+    // ********** deleteCustomerById() **********
+    @Test
+    public void deleteExistingUserWithGivenId() {
+        // given
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        doNothing().when(mockCustomerRepository).deleteById(ID);
 
+        // when & then
+        // TODO
+
+    }
+
+
+    @Test
+    public void throwNoSuchElementExceptionWhenUserWithGivenIdIsNotPresentToDelete() {
+        // given
+        when(mockCustomerRepository.findById(ID)).thenReturn(Optional.empty());
+        doNothing().when(mockCustomerRepository).deleteById(ID);
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> customerService.deleteCustomerById(ID));
+
+    }
 
 }
