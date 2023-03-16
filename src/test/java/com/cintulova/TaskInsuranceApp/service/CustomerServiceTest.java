@@ -37,12 +37,11 @@ public class CustomerServiceTest {
     private final String EMPTY_MIDDLE_NAME = "";
     private final String EMAIL = "kate.green@gmail.com";
     private final String PHONE_NUMBER = "+420122789098";
-    private final LocalDate DATE_IN_THE_PAST = LocalDate.now().minusYears(30);
-    private final LocalDate DATE_IN_THE_FUTURE = LocalDate.now().minusYears(30);
-    private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, DATE_IN_THE_PAST);
-    private final Customer CUSTOMER_WITH_MIDDLE_NAME_WITH_DATE_IN_THE_FUTURE = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, DATE_IN_THE_FUTURE);
-
-    private final Customer CUSTOMER_WITHOUT_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, EMPTY_MIDDLE_NAME, EMAIL, PHONE_NUMBER, DATE_IN_THE_PAST);
+    private final LocalDate BIRTH_DATE = LocalDate.now().minusYears(30);
+    private final LocalDate DATE_IN_THE_FUTURE = LocalDate.now().plusMonths(5);
+    private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
+    private final Customer CUSTOMER_WITH_MIDDLE_NAME_WRONG_BIRTH_DATE = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, DATE_IN_THE_FUTURE);
+    private final Customer CUSTOMER_WITHOUT_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, EMPTY_MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
 
 
     @BeforeMethod
@@ -109,11 +108,10 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
-        when(mockCustomerRepository.findByEmail(EMAIL)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME_WRONG_BIRTH_DATE)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME_WRONG_BIRTH_DATE);
 
         // when & then
-        assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME));
+        assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME_WRONG_BIRTH_DATE));
     }
 
     @Test

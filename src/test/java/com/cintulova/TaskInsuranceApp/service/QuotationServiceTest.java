@@ -1,6 +1,7 @@
 package com.cintulova.TaskInsuranceApp.service;
 
 import com.cintulova.TaskInsuranceApp.model.Customer;
+import com.cintulova.TaskInsuranceApp.model.Quotation;
 import com.cintulova.TaskInsuranceApp.repository.QuotationRepository;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -25,10 +26,11 @@ public class QuotationServiceTest {
     private final String EMAIL = "kate.green@gmail.com";
     private final String PHONE_NUMBER = "+420122789098";
     private final LocalDate BIRTH_DATE = LocalDate.now().minusYears(30);
-    private final LocalDate BEGINNING_OF_INSURANCE = LocalDate.now().plusMonths(2);
+    private final LocalDate DATE_IN_THE_PAST = LocalDate.now().plusMonths(2);
     private final Long INSURED_AMOUNT = 15000L;
-    private final LocalDate DATE_OF_SIGNING_MORTGAGE = LocalDate.now().plusDays(2);
+    private final LocalDate DATE_IN_THE_FUTURE = LocalDate.now().plusDays(2);
     private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
+    //private final Quotation QUOTATION = new Quotation(ID, )
 
 
     @BeforeMethod
