@@ -36,6 +36,8 @@ public class SubscriptionServiceTest {
     private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
     private final Quotation QUOTATION = new Quotation(ID, DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS, INSURED_AMOUNT, DATE_IN_THE_FUTURE, CUSTOMER_WITH_MIDDLE_NAME);
     private final Subscription SUBSCRIPTION = new Subscription(ID, DATE_IN_THE_FUTURE, DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS, QUOTATION);
+    private final Subscription SUBSCRIPTION_WRONG_DATES = new Subscription(ID, DATE_IN_THE_FUTURE_PLUS_TWO_MONTHS, DATE_IN_THE_FUTURE, QUOTATION);
+
 
     @BeforeMethod
     public void setUp() {
@@ -46,7 +48,24 @@ public class SubscriptionServiceTest {
     }
 
     // ********** saveSubscription() **********
+    @Test
+    public void createNewSubscription() {
+        // given
+        when(mockSubscriptionRepository.save(SUBSCRIPTION)).thenReturn(SUBSCRIPTION);
 
+        // when & then
+        assertEquals(subscriptionService.saveSubscription(SUBSCRIPTION), SUBSCRIPTION);
+    }
+
+    @Test
+    public void throwIllegalArgumentExceptionWithWrongDatesWhileCreatingNewSubscription() {
+        // given
+        when(mockSubscriptionRepository.save(SUBSCRIPTION_WRONG_DATES)).thenReturn(SUBSCRIPTION_WRONG_DATES);
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> subscriptionService.saveSubscription(SUBSCRIPTION_WRONG_DATES));
+
+    }
 
     // ********** getSubscriptionById() **********
     @Test

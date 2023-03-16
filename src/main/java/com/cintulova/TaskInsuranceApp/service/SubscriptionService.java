@@ -17,6 +17,9 @@ public class SubscriptionService {
     }
 
     public Subscription saveSubscription(Subscription subscription) {
+        if (subscription.getStartDate().isAfter(subscription.getValidUntil())) {
+            throw new IllegalArgumentException("Fill all the fields in correct format.");
+        }
         return subscriptionRepository.save(subscription);
     }
 
