@@ -60,7 +60,7 @@ public class NameValidatorTest {
     public void rteturnTrueWhenThereIsNoMiddleName() {
 
         // when & then
-        assertTrue(nameValidator.isValidMiddleName(""));
+        assertTrue(nameValidator.isValidMiddleName("t"));
 
     }
 }

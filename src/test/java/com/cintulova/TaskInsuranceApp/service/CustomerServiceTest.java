@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
@@ -51,6 +53,7 @@ public class CustomerServiceTest {
 
     }
 
+    // ********** saveCustomer() **********
     @Test
     public void createNewCustomerWithMiddleName() {
         // given
@@ -82,5 +85,62 @@ public class CustomerServiceTest {
         assertEquals(customerService.saveCustomer(CUSTOMER_WITHOUT_MIDDLE_NAME), CUSTOMER_WITHOUT_MIDDLE_NAME);
 
     }
+
+    @Test
+    public void throwIllegalArgumentExceptionWhileCreatingNewCustomerWithExistingEmail() {
+        // given
+        when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
+        when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
+        when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
+        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
+        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+        when(mockCustomerRepository.findByEmail(EMAIL)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME));
+
+    }
+
+    @Test
+    public void throwIllegalArgumentExceptionWhenThereIsBlankVariableWhileCReatingNewCustomer() {
+        // given
+        when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(false);
+        when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
+        when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
+        when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
+        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
+        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME));
+
+    }
+
+    // ********** getCustomerById() **********
+    @Test
+    public void returnExistingSavedCustomerWithGivenId() {
+        // given
+        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+
+        // when & then
+        assertEquals(customerService.getCustomerById(0L), Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+
+    }
+
+    @Test
+    public void throwNoSuchElementExceptionWhenThereIsNoSavedCustomerWithGivenId() {
+        // given
+        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.empty());
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> customerService.getCustomerById(0L));
+
+    }
+
+    // ********** updateCustomerById() **********
+
 
 }
