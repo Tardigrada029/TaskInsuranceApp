@@ -19,6 +19,7 @@ public class NameValidatorTest {
     @Test
     public void returnTrueWhenNameIsInCorrectFormat() {
 
+        // when & then
         assertTrue(nameValidator.isValidName("Kate Green"));
 
     }
@@ -26,6 +27,7 @@ public class NameValidatorTest {
     @Test
     public void returnFalseWhenNameIsNotInCorrectFormat() {
 
+        // when & then
         assertFalse(nameValidator.isValidName("Kate_Green"));
 
     }
@@ -33,7 +35,32 @@ public class NameValidatorTest {
     @Test
     public void returnFalseWhenThereIsNoName() {
 
+        // when & then
         assertFalse(nameValidator.isValidName(""));
+
+    }
+
+    @Test
+    public void returnTrueWhenMiddleNAmeIsInCorrectFormat() {
+
+        // when & then
+        assertTrue(nameValidator.isValidMiddleName("Patricia"));
+
+    }
+
+    @Test
+    public void returnFalseWhenMiddleNAmeIsNotInCorrectFormat() {
+
+        // when & then
+        assertFalse(nameValidator.isValidMiddleName("Patricia8"));
+
+    }
+
+    @Test
+    public void rteturnTrueWhenThereIsNoMiddleName() {
+
+        // when & then
+        assertTrue(nameValidator.isValidMiddleName(""));
 
     }
 }

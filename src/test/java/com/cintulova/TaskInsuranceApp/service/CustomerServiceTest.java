@@ -34,11 +34,12 @@ public class CustomerServiceTest {
     private final String FIRST_NAME = "Kate";
     private final String LAST_NAME = "Green";
     private final String MIDDLE_NAME = "Patricia";
+    private final String EMPTY_MIDDLE_NAME = "";
     private final String EMAIL = "kate.green@gmail.com";
     private final String PHONE_NUMBER = "+420122789098";
     private final LocalDate BIRTH_DATE = LocalDate.now().minusYears(30);
     private final Customer CUSTOMER_WITH_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
-    private final Customer CUSTOMER_WITHOUT_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
+    private final Customer CUSTOMER_WITHOUT_MIDDLE_NAME = new Customer(ID, FIRST_NAME, LAST_NAME, EMPTY_MIDDLE_NAME, EMAIL, PHONE_NUMBER, BIRTH_DATE);
 
 
     @BeforeMethod
@@ -63,6 +64,22 @@ public class CustomerServiceTest {
 
         // when & then
         assertEquals(customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME), CUSTOMER_WITH_MIDDLE_NAME);
+
+    }
+
+    @Test
+    public void createNewCustomerWithoutMiddleName() {
+        // given
+        when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidMiddleName(EMPTY_MIDDLE_NAME)).thenReturn(true);
+        when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
+        when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
+        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
+        when(mockCustomerRepository.save(CUSTOMER_WITHOUT_MIDDLE_NAME)).thenReturn(CUSTOMER_WITHOUT_MIDDLE_NAME);
+
+        // when & then
+        assertEquals(customerService.saveCustomer(CUSTOMER_WITHOUT_MIDDLE_NAME), CUSTOMER_WITHOUT_MIDDLE_NAME);
 
     }
 
