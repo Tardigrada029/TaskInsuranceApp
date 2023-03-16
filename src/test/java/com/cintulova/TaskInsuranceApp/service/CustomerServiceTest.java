@@ -182,11 +182,12 @@ public class CustomerServiceTest {
     public void deleteExistingUserWithGivenId() {
         // given
         when(mockCustomerRepository.findById(ID)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockCustomerRepository.findByEmail(CUSTOMER_WITH_MIDDLE_NAME.getEmail())).thenReturn(Optional.empty());
         doNothing().when(mockCustomerRepository).deleteById(ID);
 
-        // when & then
-        // TODO
-
+        // when & then TODO (I don't think it works correctly)
+        customerService.deleteCustomerById(ID);
+        assertThrows(NoSuchElementException.class, () -> customerService.getCustomerByEmail(EMAIL));
     }
 
 

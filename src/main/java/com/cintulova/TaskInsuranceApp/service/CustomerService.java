@@ -51,6 +51,13 @@ public class CustomerService  {
         return customerRepository.findById(id);
     }
 
+    public Optional<Customer> getCustomerByEmail(String email) {
+        if (customerRepository.findByEmail(email).isEmpty()) {
+            throw new NoSuchElementException("Could not find customer with email " + email + ".");
+        }
+        return customerRepository.findByEmail(email);
+    }
+
     public Customer updateCustomerById(Customer customer, Long id) {
         if (customerRepository.findById(id).isEmpty()) {
             throw new NoSuchElementException("Could not find customer with id " + id + ".");
