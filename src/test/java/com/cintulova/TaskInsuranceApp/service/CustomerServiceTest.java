@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.*;
 
@@ -141,6 +142,41 @@ public class CustomerServiceTest {
     }
 
     // ********** updateCustomerById() **********
+    @Test
+    public void updateExistingUserWithGivenId() {
+        // given
+        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
+        when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
+        when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
+        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
+        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+        doNothing().when(mockCustomerRepository).deleteById(ID);
+
+        // when & then
+        assertEquals(customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID), CUSTOMER_WITH_MIDDLE_NAME);
+
+    }
+
+    @Test
+    public void throwNoSuchElementExceptionWhenUserWithGivenIdIsNotPresentToUpdate() {
+        // given
+        when(mockCustomerRepository.findById(0L)).thenReturn(Optional.empty());
+        when(mockNameValidator.isValidName(FIRST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidName(LAST_NAME)).thenReturn(true);
+        when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
+        when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
+        when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
+        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
+        when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+        doNothing().when(mockCustomerRepository).deleteById(ID);
+
+        // when & then
+        assertThrows(NoSuchElementException.class, () -> customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID));
+    }
+
 
 
 }
