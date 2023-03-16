@@ -29,6 +29,11 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
+    @GetMapping
+    public Iterable<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
     @GetMapping("/{id}")
     public Optional<Customer> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
