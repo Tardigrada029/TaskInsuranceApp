@@ -36,7 +36,7 @@ public class QuotationServiceTest {
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        quotationService = new QuotationService(mockQuotationRepository, mockDateInTheFutureValidator);
+        quotationService = new QuotationService(mockQuotationRepository);
     }
 
     // ********** saveQuotation() **********

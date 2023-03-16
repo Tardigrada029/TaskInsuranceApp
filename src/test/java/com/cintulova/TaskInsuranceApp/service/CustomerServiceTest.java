@@ -24,8 +24,6 @@ public class CustomerServiceTest {
     @Mock
     private CustomerRepository mockCustomerRepository;
     @Mock
-    private DateInTheFutureValidator mockDateInTheFutureValidator;
-    @Mock
     private EmailValidator mockEmailValidator;
     @Mock
     private NameValidator mockNameValidator;
@@ -49,7 +47,7 @@ public class CustomerServiceTest {
     public void setUp() {
 
         MockitoAnnotations.initMocks(this);
-        customerService = new CustomerService(mockCustomerRepository, mockDateInTheFutureValidator, mockEmailValidator,
+        customerService = new CustomerService(mockCustomerRepository, mockEmailValidator,
                 mockNameValidator, mockPhoneNumberValidator);
 
     }
@@ -63,7 +61,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
 
         // when & then
@@ -79,7 +76,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(EMPTY_MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITHOUT_MIDDLE_NAME)).thenReturn(CUSTOMER_WITHOUT_MIDDLE_NAME);
 
         // when & then
@@ -95,7 +91,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
         when(mockCustomerRepository.findByEmail(EMAIL)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
 
@@ -112,7 +107,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
 
         // when & then
@@ -172,7 +166,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
         doNothing().when(mockCustomerRepository).deleteById(ID);
 
@@ -190,7 +183,6 @@ public class CustomerServiceTest {
         when(mockNameValidator.isValidMiddleName(MIDDLE_NAME)).thenReturn(true);
         when(mockEmailValidator.isValidEmail(EMAIL)).thenReturn(true);
         when(mockPhoneNumberValidator.isValidPhoneNumber(PHONE_NUMBER)).thenReturn(true);
-        when(mockDateInTheFutureValidator.isValidDateInTheFuture(BIRTH_DATE)).thenReturn(true);
         when(mockCustomerRepository.save(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
         doNothing().when(mockCustomerRepository).deleteById(ID);
 
