@@ -32,7 +32,6 @@ public class Quotation {
     private LocalDate dateOfSigningMortgage;
 
     @ManyToOne
-    @Column(name = "customer", nullable = false)
     private Customer customer;
 
     @OneToMany
