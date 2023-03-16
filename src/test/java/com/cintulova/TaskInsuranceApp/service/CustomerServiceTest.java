@@ -11,8 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -127,6 +126,16 @@ public class CustomerServiceTest {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> customerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME));
 
+    }
+
+    // ********** getAllCustomers() **********
+    @Test
+    public void returnAllExistingCustomers() {
+        // given
+        when(mockCustomerRepository.findAll()).thenReturn(Collections.singletonList(CUSTOMER_WITH_MIDDLE_NAME));
+
+        // when & then
+        assertEquals(customerService.getAllCustomers(), Collections.singletonList(CUSTOMER_WITH_MIDDLE_NAME));
     }
 
     // ********** getCustomerById() **********
