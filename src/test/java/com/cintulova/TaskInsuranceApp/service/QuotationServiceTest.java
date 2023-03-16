@@ -49,4 +49,13 @@ public class QuotationServiceTest {
 
 
     }
+
+    @Test
+    public void throwIllegalArgumentExceptionWhenSigningMortgageIsAfterBeginningInsuranceWhileCreatingNewQuotation() {
+        // given
+        
+
+        // when & then
+
+    }
 }

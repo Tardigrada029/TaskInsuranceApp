@@ -11,15 +11,15 @@ import java.util.Optional;
 public class QuotationService {
 
     private final QuotationRepository quotationRepository;
-    private final DateInTheFutureValidator dateInTheFutureValidator;
 
-    public QuotationService(QuotationRepository quotationRepository,
-                            DateInTheFutureValidator dateInTheFutureValidator) {
+    public QuotationService(QuotationRepository quotationRepository) {
         this.quotationRepository = quotationRepository;
-        this.dateInTheFutureValidator = dateInTheFutureValidator;
     }
 
     public Quotation saveQuotation(Quotation quotation) {
+        if (quotation.getDateOfSigningMortgage().isAfter(quotation.getBeginningOfInsurance())) {
+            throw new IllegalArgumentException("Fill all the fields in correct format.");
+        }
         return quotationRepository.save(quotation);
     }
 
