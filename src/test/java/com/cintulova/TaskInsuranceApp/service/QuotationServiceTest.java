@@ -6,6 +6,7 @@ import com.cintulova.TaskInsuranceApp.repository.QuotationRepository;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
@@ -39,5 +40,13 @@ public class QuotationServiceTest {
     }
 
     // ********** saveQuotation() **********
+    @Test
+    public void createNewQuotation() {
+        // given
 
+
+        // when & then
+
+
+    }
 }

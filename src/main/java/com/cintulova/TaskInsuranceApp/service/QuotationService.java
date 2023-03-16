@@ -23,11 +23,4 @@ public class QuotationService {
         return quotationRepository.save(quotation);
     }
 
-    public Optional<Quotation> getQuotationById(Long id) {
-        return quotationRepository.findById(id);
-    }
-
-    public void deleteQuotationById(Long id) {
-        quotationRepository.deleteById(id);
-    }
 }

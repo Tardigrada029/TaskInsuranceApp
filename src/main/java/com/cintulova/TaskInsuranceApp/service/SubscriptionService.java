@@ -27,7 +27,4 @@ public class SubscriptionService {
         return subscriptionRepository.findById(id);
     }
 
-    public void deleteSubscriptionById(Long id) {
-        subscriptionRepository.deleteById(id);
-    }
 }
