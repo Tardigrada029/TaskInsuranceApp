@@ -1,21 +1,22 @@
 package com.cintulova.TaskInsuranceApp.controller;
 
-import com.cintulova.TaskInsuranceApp.model.Quotation;
-import com.cintulova.TaskInsuranceApp.service.QuotationService;
+import com.cintulova.TaskInsuranceApp.model.Subscription;
+import com.cintulova.TaskInsuranceApp.service.SubscriptionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/quotations")
-public class QuotationController {
+@RequestMapping("/api/subscriptions")
+public class SubscriptionController {
 
-    private final QuotationService quotationService;
+    private final SubscriptionService subscriptionService;
 
-    public QuotationController(QuotationService quotationService) {
-        this.quotationService = quotationService;
+    public SubscriptionController(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
     }
 
     @ExceptionHandler(NoSuchElementException.class)
@@ -29,8 +30,12 @@ public class QuotationController {
     }
 
     @PostMapping
-    public Quotation saveQuotation(@RequestBody Quotation quotation) {
-        return quotationService.saveQuotation(quotation);
+    public Subscription saveSubscription(@RequestBody Subscription subscription) {
+        return subscriptionService.saveSubscription(subscription);
     }
 
+    @GetMapping("/{id}")
+    public Optional<Subscription> getSubscriptionById(@PathVariable Long id) {
+        return subscriptionService.getSubscriptionById(id);
+    }
 }
