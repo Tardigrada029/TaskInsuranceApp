@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Subscription {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subscription_id")
     private Long id;
 

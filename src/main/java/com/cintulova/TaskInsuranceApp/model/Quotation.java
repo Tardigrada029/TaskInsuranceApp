@@ -17,7 +17,7 @@ import java.util.Set;
 public class Quotation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "quotation_id")
     private Long id;
 
