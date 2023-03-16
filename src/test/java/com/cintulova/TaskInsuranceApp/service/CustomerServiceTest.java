@@ -150,7 +150,7 @@ public class CustomerServiceTest {
 
     }
 
-    // ********** getCustomerById() **********
+    // ********** getCustomerByEmail() **********
     @Test
     public void returnExistingSavedCustomerWithGivenEmail() {
         // given

@@ -4,6 +4,7 @@ import com.cintulova.TaskInsuranceApp.model.Subscription;
 import com.cintulova.TaskInsuranceApp.repository.SubscriptionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,9 @@ public class SubscriptionService {
     }
 
     public Optional<Subscription> getSubscriptionById(Long id) {
+        if (subscriptionRepository.findById(id).isEmpty()) {
+            throw new NoSuchElementException("Could not find subscription with id " + id + ".");
+        }
         return subscriptionRepository.findById(id);
     }
 
