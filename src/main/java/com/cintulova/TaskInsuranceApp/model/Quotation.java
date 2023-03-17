@@ -16,7 +16,7 @@ public class Quotation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "beginning_of_insurance", nullable = false)
@@ -29,7 +29,7 @@ public class Quotation {
     private LocalDate dateOfSigningMortgage;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "quotation")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quotation")
     private Set<Subscription> subscriptions;
 
     @ManyToOne
