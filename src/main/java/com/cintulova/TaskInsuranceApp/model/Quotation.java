@@ -17,7 +17,7 @@ public class Quotation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "quotation_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "beginning_of_insurance", nullable = false)
@@ -29,12 +29,13 @@ public class Quotation {
     @Column(name = "date_of_signing_mortgage", nullable = false)
     private LocalDate dateOfSigningMortgage;
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "quotation_id")
+    private Set<Subscription> subscriptions;
+
     @ManyToOne
     private Customer customer;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "quotation", cascade = CascadeType.ALL)
-    private Set<Subscription> subscriptions = new HashSet<>();
 
     // constructor
     public Quotation(Long id, LocalDate beginningOfInsurance, Long insuredAmount,

@@ -16,7 +16,7 @@ public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subscription_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "start_date", nullable = false)
@@ -26,7 +26,6 @@ public class Subscription {
     private LocalDate validUntil;
 
     @ManyToOne
-    @JoinColumn(name = "quotation_id", nullable = false)
     private Quotation quotation;
 
 }

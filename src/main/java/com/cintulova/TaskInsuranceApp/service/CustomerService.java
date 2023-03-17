@@ -64,8 +64,8 @@ public class CustomerService  {
         if (customerRepository.findById(id).isEmpty()) {
             throw new NoSuchElementException("Could not find customer with id " + id + ".");
         }
-        deleteCustomerById(id);
-        return saveCustomer(customer);
+        customerRepository.deleteById(id);
+        return customerRepository.save(customer);
     }
 
     public void deleteCustomerById(Long id) {

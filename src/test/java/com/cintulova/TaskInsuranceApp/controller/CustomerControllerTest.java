@@ -92,7 +92,7 @@ public class CustomerControllerTest {
         when(mockCustomerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
 
         // when
-        Customer result = customerController.updateCustomerById(ID, CUSTOMER_WITH_MIDDLE_NAME);
+        Customer result = customerController.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID);
 
         // then
         assertNotNull(result);

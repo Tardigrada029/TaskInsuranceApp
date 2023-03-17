@@ -45,7 +45,7 @@ public class CustomerController {
     }
 
     @PatchMapping("/{id}")
-    public Customer updateCustomerById(@PathVariable Long id, @RequestBody Customer customer) {
+    public Customer updateCustomerById(@RequestBody Customer customer, @PathVariable Long id) {
         return customerService.updateCustomerById(customer, id);
     }
 
