@@ -18,7 +18,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Size(min = 2, max = 150)
@@ -45,8 +45,7 @@ public class Customer {
     private LocalDate birthDate;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Quotation> quotations;
 
     public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber,

@@ -1,5 +1,6 @@
 package com.cintulova.TaskInsuranceApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "start_date", nullable = false)
@@ -26,6 +27,7 @@ public class Subscription {
     private LocalDate validUntil;
 
     @ManyToOne
+    @JoinColumn(name = "quotation_id")
     private Quotation quotation;
 
 }
