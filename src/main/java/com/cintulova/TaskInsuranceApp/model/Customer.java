@@ -18,7 +18,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @JoinColumn(name = "id", unique = true, nullable = false)
     private Long id;
 
     @Size(min = 2, max = 150)
