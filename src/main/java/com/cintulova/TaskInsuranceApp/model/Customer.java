@@ -44,8 +44,7 @@ public class Customer {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @OneToMany
-    @JoinColumn(name = "customer_id")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Quotation> quotations = new HashSet<>();
 
     public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber,

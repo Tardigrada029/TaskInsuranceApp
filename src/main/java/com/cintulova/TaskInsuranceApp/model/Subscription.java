@@ -26,6 +26,7 @@ public class Subscription {
     private LocalDate validUntil;
 
     @ManyToOne
+    @JoinColumn(name = "quotation_id", nullable = false)
     private Quotation quotation;
 
 }

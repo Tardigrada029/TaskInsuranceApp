@@ -3,14 +3,12 @@ package com.cintulova.TaskInsuranceApp.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode
 @Entity
 @Table(name = "tbl_quotations")
@@ -33,8 +31,7 @@ public class Quotation {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany
-    @JoinColumn(name = "quotation_id")
+    @OneToMany(mappedBy = "quotation", cascade = CascadeType.ALL)
     private Set<Subscription> subscriptions = new HashSet<>();
 
     // constructor
