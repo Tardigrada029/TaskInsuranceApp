@@ -1,5 +1,6 @@
 package com.cintulova.TaskInsuranceApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,6 +45,7 @@ public class Customer {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Quotation> quotations = new HashSet<>();
 
