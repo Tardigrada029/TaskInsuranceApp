@@ -3,6 +3,8 @@ package com.cintulova.TaskInsuranceApp.service;
 import com.cintulova.TaskInsuranceApp.inputValidator.*;
 import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @Service
 public class CustomerService  {
 
+    private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
     private final CustomerRepository customerRepository;
     private final EmailValidator emailValidator;
     private final NameValidator nameValidator;
@@ -28,6 +31,7 @@ public class CustomerService  {
     }
 
     public Customer saveCustomer(Customer customer) {
+        logger.debug("Saving customer: " + customer);
         if (customerRepository.findByEmail(customer.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Customer with email " + customer.getEmail() + " already exists.");
         }
@@ -43,6 +47,7 @@ public class CustomerService  {
     }
 
     public Optional<Customer> getCustomerById(Long id) {
+        logger.debug("Retrieving customer by id: " + id);
         if (customerRepository.findById(id).isEmpty()) {
             throw new NoSuchElementException("Could not find customer with id " + id + ".");
         }
@@ -50,18 +55,16 @@ public class CustomerService  {
     }
 
     public Iterable<Customer> getAllCustomers() {
+        logger.debug("Retrieving all customers");
         return customerRepository.findAll();
     }
 
     public Optional<Customer> getCustomerByEmail(String email) {
+        logger.debug("Retrieving customer by email: " + email);
         if (customerRepository.findByEmail(email).isEmpty()) {
             throw new NoSuchElementException("Could not find customer with email " + email + ".");
         }
         return customerRepository.findByEmail(email);
     }
-
-//    public Customer updateCustomerById(Customer customer) {
-//        return customerRepository.save(customer);
-//    }
 
 }

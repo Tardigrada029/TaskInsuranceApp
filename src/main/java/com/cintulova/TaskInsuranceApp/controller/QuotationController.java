@@ -1,7 +1,10 @@
 package com.cintulova.TaskInsuranceApp.controller;
 
 import com.cintulova.TaskInsuranceApp.model.Quotation;
+import com.cintulova.TaskInsuranceApp.service.CustomerService;
 import com.cintulova.TaskInsuranceApp.service.QuotationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/api/quotations")
 public class QuotationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(QuotationController.class);
     private final QuotationService quotationService;
 
     public QuotationController(QuotationService quotationService) {
@@ -30,6 +34,7 @@ public class QuotationController {
 
     @PostMapping
     public Quotation saveQuotation(@RequestBody Quotation quotation) {
+        logger.debug("Saving quotation: " + quotation);
         return quotationService.saveQuotation(quotation);
     }
 
