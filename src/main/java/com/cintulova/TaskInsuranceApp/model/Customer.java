@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Entity
@@ -41,25 +42,5 @@ public class Customer {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
-
-    public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber,
-                    LocalDate birthDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-    }
-
-    public Customer(Long id, String firstName, String lastName, String email, String phoneNumber, LocalDate birthDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthDate = birthDate;
-    }
 
 }

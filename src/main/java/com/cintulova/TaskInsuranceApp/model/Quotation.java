@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
 @Table(name = "tbl_quotations")
@@ -29,15 +30,5 @@ public class Quotation {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
-    // constructor
-    public Quotation(Long id, LocalDate beginningOfInsurance, Long insuredAmount,
-                     LocalDate dateOfSigningMortgage, Customer customer) {
-        this.id = id;
-        this.beginningOfInsurance = beginningOfInsurance;
-        this.insuredAmount = insuredAmount;
-        this.dateOfSigningMortgage = dateOfSigningMortgage;
-        this.customer = customer;
-    }
 
 }
