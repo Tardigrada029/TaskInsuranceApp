@@ -180,6 +180,7 @@ public class CustomerServiceTest {
 
     }
 
+    // TODO: update test
     // ********** updateCustomerById() **********
     @Test
     public void updateExistingUserWithGivenId() {
@@ -194,7 +195,7 @@ public class CustomerServiceTest {
         doNothing().when(mockCustomerRepository).deleteById(ID);
 
         // when & then
-        assertEquals(customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID), CUSTOMER_WITH_MIDDLE_NAME);
+        assertEquals(customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME), CUSTOMER_WITH_MIDDLE_NAME);
 
     }
 
@@ -211,7 +212,7 @@ public class CustomerServiceTest {
         doNothing().when(mockCustomerRepository).deleteById(ID);
 
         // when & then
-        assertThrows(NoSuchElementException.class, () -> customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID));
+        assertThrows(NoSuchElementException.class, () -> customerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME));
     }
 
     // ********** deleteCustomerById() **********

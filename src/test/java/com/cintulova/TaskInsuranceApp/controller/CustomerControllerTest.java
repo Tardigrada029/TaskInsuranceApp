@@ -85,14 +85,15 @@ public class CustomerControllerTest {
 
     }
 
+    // TODO: update test
     // ********** updateCustomerById() **********
     @Test
     public void testUpdateCustomerById() {
         // given
-        when(mockCustomerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+        when(mockCustomerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
 
         // when
-        Customer result = customerController.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID);
+        Customer result = customerController.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME);
 
         // then
         assertNotNull(result);

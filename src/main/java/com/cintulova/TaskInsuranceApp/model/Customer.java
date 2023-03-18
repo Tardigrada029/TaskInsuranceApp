@@ -1,12 +1,10 @@
 package com.cintulova.TaskInsuranceApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -43,10 +41,6 @@ public class Customer {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
-
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Set<Quotation> quotations;
 
     public Customer(Long id, String firstName, String lastName, String middleName, String email, String phoneNumber,
                     LocalDate birthDate) {

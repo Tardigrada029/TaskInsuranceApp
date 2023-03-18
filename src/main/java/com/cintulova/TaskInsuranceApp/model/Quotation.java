@@ -1,11 +1,9 @@
 package com.cintulova.TaskInsuranceApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -28,12 +26,8 @@ public class Quotation {
     @Column(name = "date_of_signing_mortgage", nullable = false)
     private LocalDate dateOfSigningMortgage;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quotation")
-    private Set<Subscription> subscriptions;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     // constructor

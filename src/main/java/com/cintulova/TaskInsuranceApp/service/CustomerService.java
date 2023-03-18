@@ -60,11 +60,7 @@ public class CustomerService  {
         return customerRepository.findByEmail(email);
     }
 
-    public Customer updateCustomerById(Customer customer, Long id) {
-        if (customerRepository.findById(id).isEmpty()) {
-            throw new NoSuchElementException("Could not find customer with id " + id + ".");
-        }
-        customerRepository.deleteById(id);
+    public Customer updateCustomerById(Customer customer) {
         return customerRepository.save(customer);
     }
 

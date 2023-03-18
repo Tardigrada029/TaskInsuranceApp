@@ -44,9 +44,33 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public Customer updateCustomerById(@RequestBody Customer customer, @PathVariable Long id) {
-        return customerService.updateCustomerById(customer, id);
+        Optional<Customer> previousCustomer = customerService.getCustomerById(id);
+        if (previousCustomer.isEmpty()) {
+            throw new NoSuchElementException("Could not find customer with id " + id + ".");
+        } else {
+            Customer existingCustomer = previousCustomer.get();
+            if (customer.getFirstName() != null) {
+                existingCustomer.setFirstName(customer.getFirstName());
+            }
+            if (customer.getLastName() != null) {
+                existingCustomer.setLastName(customer.getLastName());
+            }
+            if (customer.getMiddleName() != null) {
+                existingCustomer.setMiddleName(customer.getMiddleName());
+            }
+            if (customer.getEmail() != null) {
+                existingCustomer.setEmail(customer.getEmail());
+            }
+            if (customer.getPhoneNumber() != null) {
+                existingCustomer.setPhoneNumber(customer.getPhoneNumber());
+            }
+            if (customer.getBirthDate() != null) {
+                existingCustomer.setBirthDate(customer.getBirthDate());
+            }
+            return customerService.updateCustomerById(existingCustomer);
+        }
     }
 
     @DeleteMapping("/{id}")

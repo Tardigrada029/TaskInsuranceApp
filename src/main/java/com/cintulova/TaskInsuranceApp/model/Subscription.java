@@ -25,8 +25,8 @@ public class Subscription {
     @Column(name = "valid_until", nullable = false)
     private LocalDate validUntil;
 
-    @ManyToOne
-    @JoinColumn(name = "quotation_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "quotation_id")
     private Quotation quotation;
 
 }
