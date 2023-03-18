@@ -60,8 +60,8 @@ public class CustomerService  {
         return customerRepository.findByEmail(email);
     }
 
-    public Customer updateCustomerById(Customer customer) {
-        return customerRepository.save(customer);
-    }
+//    public Customer updateCustomerById(Customer customer) {
+//        return customerRepository.save(customer);
+//    }
 
 }

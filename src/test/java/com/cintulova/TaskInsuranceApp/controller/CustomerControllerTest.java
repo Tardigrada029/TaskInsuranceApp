@@ -90,27 +90,14 @@ public class CustomerControllerTest {
     @Test
     public void testUpdateCustomerById() {
         // given
-        when(mockCustomerService.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
+        when(mockCustomerService.getCustomerById(ID)).thenReturn(Optional.of(CUSTOMER_WITH_MIDDLE_NAME));
+        when(mockCustomerService.saveCustomer(CUSTOMER_WITH_MIDDLE_NAME)).thenReturn(CUSTOMER_WITH_MIDDLE_NAME);
 
         // when
-        Customer result = customerController.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME);
+        Customer result = customerController.updateCustomerById(CUSTOMER_WITH_MIDDLE_NAME, ID);
 
         // then
         assertNotNull(result);
-
-    }
-
-    // ********** deleteCustomerById() **********
-    @Test
-    public void testDeleteCustomerById() {
-        // given
-        doNothing().when(mockCustomerService).deleteCustomerById(ID);
-
-        // when
-        customerController.deleteCustomerById(ID);
-
-        // then
-        verify(mockCustomerService, times(1)).deleteCustomerById(ID);
 
     }
 

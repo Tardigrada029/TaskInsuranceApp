@@ -69,7 +69,7 @@ public class CustomerController {
             if (customer.getBirthDate() != null) {
                 existingCustomer.setBirthDate(customer.getBirthDate());
             }
-            return customerService.updateCustomerById(existingCustomer);
+            return customerService.saveCustomer(existingCustomer);
         }
     }
 
