@@ -2,6 +2,7 @@ package com.cintulova.TaskInsuranceApp.controller;
 
 import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.service.CustomerService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,16 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
     private final CustomerService customerService;
-
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {

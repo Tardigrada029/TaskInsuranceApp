@@ -2,6 +2,7 @@ package com.cintulova.TaskInsuranceApp.service;
 
 import com.cintulova.TaskInsuranceApp.model.Subscription;
 import com.cintulova.TaskInsuranceApp.repository.SubscriptionRepository;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,15 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class SubscriptionService {
 
     private static final Logger logger = LoggerFactory.getLogger(SubscriptionService.class);
     private final SubscriptionRepository subscriptionRepository;
-
-    public SubscriptionService(SubscriptionRepository subscriptionRepository) {
-        this.subscriptionRepository = subscriptionRepository;
-    }
 
     public Subscription saveSubscription(Subscription subscription) {
         logger.debug("Saving subscription: " + subscription);

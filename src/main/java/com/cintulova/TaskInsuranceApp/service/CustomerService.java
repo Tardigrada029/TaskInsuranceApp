@@ -3,6 +3,7 @@ package com.cintulova.TaskInsuranceApp.service;
 import com.cintulova.TaskInsuranceApp.inputValidator.*;
 import com.cintulova.TaskInsuranceApp.model.Customer;
 import com.cintulova.TaskInsuranceApp.repository.CustomerRepository;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class CustomerService  {
 
@@ -19,16 +21,6 @@ public class CustomerService  {
     private final EmailValidator emailValidator;
     private final NameValidator nameValidator;
     private final PhoneNumberValidator phoneNumberValidator;
-
-    public CustomerService(CustomerRepository customerRepository,
-                           EmailValidator emailValidator,
-                           NameValidator nameValidator,
-                           PhoneNumberValidator phoneNumberValidator) {
-        this.customerRepository = customerRepository;
-        this.emailValidator = emailValidator;
-        this.nameValidator = nameValidator;
-        this.phoneNumberValidator = phoneNumberValidator;
-    }
 
     public Customer saveCustomer(Customer customer) {
         logger.debug("Saving customer: " + customer);

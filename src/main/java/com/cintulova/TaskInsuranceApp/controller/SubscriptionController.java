@@ -3,6 +3,7 @@ package com.cintulova.TaskInsuranceApp.controller;
 import com.cintulova.TaskInsuranceApp.model.Subscription;
 import com.cintulova.TaskInsuranceApp.service.CustomerService;
 import com.cintulova.TaskInsuranceApp.service.SubscriptionService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,16 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/subscriptions")
 public class SubscriptionController {
 
     private static final Logger logger = LoggerFactory.getLogger(SubscriptionController.class);
     private final SubscriptionService subscriptionService;
-
-    public SubscriptionController(SubscriptionService subscriptionService) {
-        this.subscriptionService = subscriptionService;
-    }
 
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
